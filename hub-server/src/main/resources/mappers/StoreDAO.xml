@@ -1,0 +1,35 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//En"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.dankook.hub.dao.StoreDAO">
+    <select id="listStores" resultType="com.dankook.hub.vo.StoreVO">
+        SELECT * FROM STORE WHERE CATE_NAME = #{cate_name};
+    </select>
+    
+    
+    <select id="listAllStores" resultType="com.dankook.hub.vo.StoreVO">
+        SELECT * FROM STORE;
+    </select>
+    
+    <!-- 나중에 store + store_detail 테이블 합친 view로 바꾸기 -->
+    <select id="selectStore" resultType="com.dankook.hub.vo.StoreDetailVO">
+        SELECT *
+        FROM STORE
+        WHERE ST_KEY=#{st_key};
+    </select>
+    
+    <insert id="insertStore" useGeneratedKeys="true" keyProperty="st_key">
+   		INSERT INTO STORE(`ST_NAME`, `ST_ADDRESS`, `ATCH_FILE_ID`, `ST_TELL`, `ST_OPEN_TIME`,`ST_CLOSE_TIME`, `ST_INTRODUCTION`, `CATE_NAME`)
+    	VALUES(
+     		#{st_name},
+     		#{st_address},
+     		#{atch_file_id},
+     		#{st_tell},
+     		#{st_open_time},
+     		#{st_close_time},
+     		#{st_introduction},
+     		#{cate_name}
+     	)
+	</insert>
+</mapper>
